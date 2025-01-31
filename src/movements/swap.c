@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_operations.c                                    :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarrero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:22:07 by rmarrero          #+#    #+#             */
-/*   Updated: 2024/11/22 13:12:57 by rmarrero         ###   ########.fr       */
+/*   Updated: 2025/01/31 11:52:41 by rmarrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/push_swap.h"
 
 // --- All moves ---
-
-// --- sa swap a: Swaps the first two elements of stack a. Does nothing if there are one or fewer elements. ---
+// --- sa swap a: Swaps the first two elements of stack a. --- //
+// --- Does nothing if there are one or fewer elements. --- //
 void	ft_sa_swap_a(t_stack **stack_a, int print)
 {
 	int	tmp_value;
@@ -29,7 +29,8 @@ void	ft_sa_swap_a(t_stack **stack_a, int print)
 		ft_printf("sa\n");
 }
 
-// --- sb swap b: Swaps the first two elements of stack b. Does nothing if there are one or fewer elements. ---
+// --- sb swap b: Swaps the first two elements of stack b. --- //
+// Does nothing if there are one or fewer elements. --- //
 void	ft_sb_swap_b(t_stack **stack_b, int print)
 {
 	int	tmp_value;
@@ -46,12 +47,11 @@ void	ft_sb_swap_b(t_stack **stack_b, int print)
 }
 
 // --- ss swap a and swap b at the same time. ---
-void    ft_ss_swap_ab(t_stack **stack_a, t_stack **stack_b)
+void	ft_ss_swap_ab(t_stack **stack_a, t_stack **stack_b)
 {
-    if (!*stack_b || !((*stack_b)->next) || !*stack_a || !((*stack_a)->next))
-        return ;
-    ft_sa_swap_a(stack_a, 0);
-    ft_sb_swap_b(stack_b, 0);
-    ft_printf("ss\n");
+	if (!*stack_b || !((*stack_b)->next) || !*stack_a || !((*stack_a)->next))
+		return ;
+	ft_sa_swap_a(stack_a, 0);
+	ft_sb_swap_b(stack_b, 0);
+	ft_printf("ss\n");
 }
-

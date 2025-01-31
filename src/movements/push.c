@@ -6,11 +6,10 @@
 /*   By: rmarrero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:41:04 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/01/24 16:43:36 by rmarrero         ###   ########.fr       */
+/*   Updated: 2025/01/31 11:50:16 by rmarrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/push_swap.h"
-
 
 /*
 void	push(t_stack **src, t_stack **dst)
@@ -58,14 +57,15 @@ void	update_src(t_stack **src)
 	}
 	*src = tmp;
 }
+
 void	push(t_stack **src, t_stack **dst)
 {
 	t_stack	*tmp;
 
 	if (*src == NULL)
 		return ;
-	tmp = *src; // Guardamos el nodo que vamos a mover
-	update_src(src); // Actualizamos src
+	tmp = *src;
+	update_src(src);
 	if (*dst == NULL)
 	{
 		tmp->next = tmp;
@@ -78,10 +78,8 @@ void	push(t_stack **src, t_stack **dst)
 		(*dst)->prev->next = tmp;
 		(*dst)->prev = tmp;
 	}
-	*dst = tmp; // Actualizamos dst para que apunte al nuevo nodo
+	*dst = tmp;
 }
-
-
 
 // pa push a: Takes the first element from stack b and puts it 
 //first in stack a. It does nothing if b is empty.
