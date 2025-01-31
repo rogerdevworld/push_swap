@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../../../include/push_swap.h"
 
-// --- tengo problemas con la constante fue modificada a 0.532 --- //
+// --- I have problems with the constant was modified to 0.532 --- //
 int	chuncks_opimi(int argc)
 {
 	int		chunks;
@@ -85,7 +85,7 @@ void	assign_chunks(t_stack *stack, int num_chunks)
 	tmp->group = (max_index - tmp->index) / range;
 }
 
-// Determinar si usar ra o rra para mover el elemento al tope
+// --- Determine whether to use ra or rra to move the element to the top --- //
 int	calculate_cost(t_stack *stack, t_stack *target)
 {
 	t_stack	*tmp;
@@ -109,7 +109,7 @@ int	calculate_cost(t_stack *stack, t_stack *target)
 		return (-1);
 }
 
-// Función para mover el elemento más rentable al tope y pasarlo al stack_b
+// --- Determine whether to use ra or rra to move the element to the top --- //
 void	optimize_and_push(t_stack **stack_a, t_stack **stack_b)
 {
 	int		direction;
