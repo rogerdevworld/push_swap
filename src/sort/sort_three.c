@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../../include/push_swap.h"
 
-// --- caso de 3 elementos --- //
+// --- case of 3 elements ---
 void	sort_three(t_stack **stack)
 {
 	if (min_value(*stack) == (*stack)->value)
