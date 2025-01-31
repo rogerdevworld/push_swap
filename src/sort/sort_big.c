@@ -105,17 +105,22 @@ void	optimize_and_push_to_b(t_stack **stack_a, t_stack **stack_b)
 // --- pasa el nodo en orden ascendente de grupo --- //
 void	go_to_a(t_stack **stack_a, t_stack **stack_b, int argc)
 {
-	t_stack	tmp;
-	t_stack	start;
+	t_stack	*tmp;
+	t_stack	*start;
 
 	if (!stack_b || !*stack_b)
-		return ;
+		return;
+
 	tmp = *stack_b;
-	start = *stack_b;
-	do
+	start = tmp;
+
+	while (1)
 	{
 		if (tmp->group != 0)	
 			optimize_and_push_to_b(stack_a, stack_b);
 		tmp = tmp->next;
-	} while (tmp != start);
+		if (tmp == start) // Si volvemos al inicio, terminamos
+			break;
+	}
 }
+
