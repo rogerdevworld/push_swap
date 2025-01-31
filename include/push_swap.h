@@ -90,7 +90,7 @@ void	pass_group_to_b(t_stack **stack_a, t_stack **stack_b, int argc);
 t_stack	*find_best_element_b(t_stack *stack);
 
 // --- 9.2.6 optimal push to send from b to a --- //
-void	optimize_and_push_b(t_stack **stack_a, t_stack **stack_b);
+void	optimize_and_push_to_b(t_stack **stack_a, t_stack **stack_b);
 
 // --- 9.2.7 optimal push to send from b to j to --- //
 void	go_to_a(t_stack **stack_a, t_stack **stack_b, int argc);
