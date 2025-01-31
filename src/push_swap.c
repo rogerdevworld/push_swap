@@ -27,7 +27,7 @@ t_stack	*create_a_new_list(char **str_of_values, int argc)
 	return (tmp);
 }
 
-// --- elementos ordenados o no --- //
+// --- elements ordered or not --- //
 int	sorted(t_stack *stack)
 {
 	t_stack	*tmp;
@@ -47,7 +47,7 @@ int	sorted(t_stack *stack)
 	return (1);
 }
 
-// --- filtrar por caso ---
+// --- filter by case --- //
 void	sort_case(t_stack **stack_a, t_stack **stack_b, int argc)
 {
 	assign_indices(*stack_a);
@@ -103,5 +103,4 @@ ARG=$(shuf -i 1-100 -n 100 | tr '\n' ' '); ./push_swap $ARG | ./checkr $ARG
 
 //visualizador
 ARG=$(shuf -i 1-500 -n 500 | tr '\n' ' '); python3 pyviz.py $ARG
-
  */
