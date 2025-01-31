@@ -6,7 +6,7 @@
 /*   By: rmarrero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:02:21 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/01/31 15:13:49 by rmarrero         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:19:53 by rmarrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/push_swap.h"
@@ -30,7 +30,8 @@ int	get_max_group(t_stack *stack)
 	return (max_group);
 }
 
-// Esta función encuentra y devuelve el mayor número en la pila dada.
+// ---- This function finds and returns --- //
+// --- the largest number on the given stack. --- //
 int	max_value(t_stack *stack_a)
 {
 	int		i;
@@ -49,7 +50,8 @@ int	max_value(t_stack *stack_a)
 	return (i);
 }
 
-// Esta función encuentra y devuelve el número más pequeño de la pila dada.
+// --- This function finds and returns the --- //
+// ---  smallest number in the given stack. --- //
 int	min_value(t_stack *stack_a)
 {
 	int		i;
@@ -66,7 +68,7 @@ int	min_value(t_stack *stack_a)
 	return (i);
 }
 
-// --- buscar position in the list --- //
+// --- search position in the list --- //
 t_stack	*min_nodo(t_stack *stack)
 {
 	t_stack	*min_node;
@@ -86,7 +88,7 @@ t_stack	*min_nodo(t_stack *stack)
 	return (min_node);
 }
 
-// max value nodo
+// --- max value node --- //
 t_stack	*max_nodo(t_stack *stack)
 {
 	t_stack	*max_node;
