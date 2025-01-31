@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../../include/push_swap.h"
 
-// --- caso de 4 elementos ---
+// --- case of 4 elements ---
 void	sort_four(t_stack **stack_a, t_stack **stack_b)
 {
 	int		count;
