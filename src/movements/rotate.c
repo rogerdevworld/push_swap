@@ -12,7 +12,7 @@
 #include "../../include/push_swap.h"
 
 // --- ra rotate a: Moves up all elements in the stack --- //
-// one position, so that the first element becomes the last. -- //
+// --- one position, so that the first element becomes the last. -- //
 void	ft_ra_rotate_a(t_stack **stack_a, int print)
 {
 	if (!stack_a || !*stack_a || !((*stack_a)->next))
@@ -24,7 +24,7 @@ void	ft_ra_rotate_a(t_stack **stack_a, int print)
 
 // --- rb rotate b: Moves up all elements of stack b one position, --- //
 // --- so that the first element becomes the last one. 
-// rr ra and rb at the same time. --- //
+// --- rr ra and rb at the same time. --- //
 void	ft_rb_rotate_b(t_stack **stack_b, int print)
 {
 	if (!stack_b || !*stack_b || !((*stack_b)->next))
