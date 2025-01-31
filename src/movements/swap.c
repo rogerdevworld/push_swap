@@ -30,7 +30,7 @@ void	ft_sa_swap_a(t_stack **stack_a, int print)
 }
 
 // --- sb swap b: Swaps the first two elements of stack b. --- //
-// Does nothing if there are one or fewer elements. --- //
+// --- Does nothing if there are one or fewer elements. --- //
 void	ft_sb_swap_b(t_stack **stack_b, int print)
 {
 	int	tmp_value;
