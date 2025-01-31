@@ -54,20 +54,14 @@ void	assign_indices(t_stack *stack)
 	}
 }
 
-// --- apply chunck --- //
-void	assign_chunks(t_stack *stack, int num_chunks)
+size_t	get_max_index(t_stack *stack)
 {
-	size_t	max_index;
-	size_t	range;
 	t_stack	*tmp;
-	t_stack	*start;
+	size_t	max_index;
 
-	if (!stack || num_chunks <= 0)
-		return ;
 	max_index = 0;
 	tmp = stack;
-	start = stack;
-	while (tmp->next != start)
+	while (tmp->next != stack)
 	{
 		if (tmp->index > max_index)
 			max_index = tmp->index;
@@ -75,9 +69,24 @@ void	assign_chunks(t_stack *stack, int num_chunks)
 	}
 	if (tmp->index > max_index)
 		max_index = tmp->index;
-	range = (max_index) / num_chunks + ((max_index) % num_chunks != 0);
+	return (max_index);
+}
+
+// --- apply chunck --- //
+void	assign_chunks(t_stack *stack, int num_chunks)
+{
+	t_stack	*tmp;
+	size_t	max_index;
+	size_t	range;
+
+	if (!stack || num_chunks <= 0)
+		return;
+
+	max_index = get_max_index(stack);
+	range = max_index / num_chunks + (max_index % num_chunks != 0);
+
 	tmp = stack;
-	while (tmp->next != start)
+	while (tmp->next != stack)
 	{
 		tmp->group = (max_index - tmp->index) / range;
 		tmp = tmp->next;
