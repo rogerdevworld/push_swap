@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "../../include/push_swap.h"
 
+// --- case of 6 elements ---
 void	sort_six(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*min_node;
