@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../../include/push_swap.h"
 
-// --- caso de 5 elementos ---
+// --- case of 5 elements ---
 void	sort_five(t_stack **stack_a, t_stack **stack_b)
 {
 	while (size_stack(*stack_a) > 3)
