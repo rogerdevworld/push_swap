@@ -95,7 +95,7 @@ void optimize_and_push_to_b(t_stack **stack_a, t_stack **stack_b)
     ft_pa_push_a(stack_a, stack_b);
 }
 
-// --- función para pasar todos los grupos menos el 0 --- //
+
 // --- pasa el nodo en orden ascendente de grupo --- //
 void go_to_a(t_stack **stack_a, t_stack **stack_b, int argc)
 {
