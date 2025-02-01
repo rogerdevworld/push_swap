@@ -11,6 +11,20 @@
 /* ************************************************************************** */
 #include "../../../include/push_swap.h"
 
+// --- I have problems with the constant was modified to 0.532 --- //
+int	chuncks_opimi(int argc)
+{
+	int		chunks;
+	double	z;
+
+	chunks = 0;
+	z = 0.532;
+	if (argc <= 6)
+		return (1);
+	chunks = (int)(ft_sqrt(argc - 1) * z + 0.5);
+	return (chunks);
+}
+
 void	sort_fixed(t_stack **stack_a, t_stack **stack_b)
 {
 	int	max;
