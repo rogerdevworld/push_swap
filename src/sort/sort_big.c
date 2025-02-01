@@ -6,7 +6,7 @@
 /*   By: rmarrero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:22:07 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/01/31 19:39:16 by rmarrero         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:44:52 by rmarrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/push_swap.h"
@@ -109,18 +109,15 @@ void	go_to_a(t_stack **stack_a, t_stack **stack_b, int argc)
 	t_stack	*start;
 
 	if (!stack_b || !*stack_b)
-		return;
-
+		return ;
 	tmp = *stack_b;
 	start = tmp;
-
 	while (1)
 	{
-		if (tmp->group != 0)	
+		if (tmp->group != 0)
 			optimize_and_push_to_b(stack_a, stack_b);
 		tmp = tmp->next;
-		if (tmp == start) // Si volvemos al inicio, terminamos
-			break;
+		if (tmp == start)
+			break ;
 	}
 }
-
