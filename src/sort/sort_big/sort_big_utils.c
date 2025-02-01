@@ -6,24 +6,10 @@
 /*   By: rmarrero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:46:33 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/01/31 13:17:29 by rmarrero         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:46:16 by rmarrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../../include/push_swap.h"
-
-// --- I have problems with the constant was modified to 0.532 --- //
-int	chuncks_opimi(int argc)
-{
-	int		chunks;
-	double	z;
-
-	chunks = 0;
-	z = 0.532;
-	if (argc <= 6)
-		return (1);
-	chunks = (int)(ft_sqrt(argc - 1) * z + 0.5);
-	return (chunks);
-}
 
 // --- apply index --- //
 void	assign_indices(t_stack *stack)
@@ -80,11 +66,9 @@ void	assign_chunks(t_stack *stack, int num_chunks)
 	size_t	range;
 
 	if (!stack || num_chunks <= 0)
-		return;
-
+		return ;
 	max_index = get_max_index(stack);
 	range = max_index / num_chunks + (max_index % num_chunks != 0);
-
 	tmp = stack;
 	while (tmp->next != stack)
 	{
