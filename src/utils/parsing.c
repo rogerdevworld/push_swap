@@ -6,7 +6,7 @@
 /*   By: rmarrero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:59 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/02/10 11:56:55 by rmarrero         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:16:00 by rmarrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/push_swap.h"
@@ -76,9 +76,11 @@ int	ft_error_params(int argc, char **argv)
 		j = 0;
 		if (argv[i][j] ==  '+' || argv[i][j] == '-')
 			j++;
+		if (argv[i][j] == '\0')
+			return (0);
 		while (argv[i][j])
 		{
-			if (!ft_isdigit(argv[i][j]) || argv[i][j] == '\0')
+			if (!ft_isdigit(argv[i][j]))
 				return (0);
 			j++;
 		}
