@@ -6,7 +6,7 @@
 /*   By: rmarrero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:58:59 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/01/31 18:05:01 by rmarrero         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:49:47 by rmarrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/push_swap.h"
@@ -34,7 +34,7 @@ int	ft_2147483648(char **argv)
 	while (argv[i])
 	{
 		value = ft_atoi_long(argv[i]);
-		if (value > 2147483647 || value < -2147483648)
+		if (value > INT_MAX || value < INT_MIN)
 			return (0);
 		i++;
 	}
@@ -74,10 +74,11 @@ int	ft_error_params(int argc, char **argv)
 	while (argv[i])
 	{
 		j = 0;
+		if (argv[i][j] ==  '+' || argv[i][j] == '-')
+			j++;
 		while (argv[i][j])
 		{
-			if ((argv[i][j] < '0' || argv[i][j] > '9') \
-				&& argv[i][j] != '-' && argv[i][j] != '+')
+			if (!ft_isdigit(argv[i][j]) || argv[i][j])
 				return (0);
 			j++;
 		}
