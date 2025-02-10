@@ -6,7 +6,7 @@
 #    By: rmarrero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:58:52 by rmarrero          #+#    #+#              #
-#    Updated: 2025/01/31 18:12:07 by rmarrero         ###   ########.fr        #
+#    Updated: 2025/02/10 12:17:33 by rmarrero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # --- Mandatory --- #
@@ -37,7 +37,7 @@ all: $(NAME)
 $(NAME): $(HEADER) Makefile
 	make all -C libft
 	@echo "$(GREEN)Compilando push_swap...$(RESET)"
-	$(CC)  $(ALLOBJS) -o $(NAME) 
+	$(CC)  $(ALLOBJS) -g -o $(NAME) 
 	@echo "$(BLUE)"
 	@echo "$(YELLOW)           ($(RESET)__$(YELLOW))\           $(RESET)"
 	@echo "$(YELLOW)           ($(RESET)oo$(YELLOW))\\________  $(RESET)"
@@ -48,7 +48,7 @@ $(NAME): $(HEADER) Makefile
 	@echo "$(RESET)"
 
 test:
-	git clone https://github.com/your-username/push_swap_tester.git
+	git clone https://github.com/rogerdevworld/push_swap_tester.git
 	cd push_swap_tester
 	chmod +x tester_push_swap.sh
 	./tester_push_swap.sh
