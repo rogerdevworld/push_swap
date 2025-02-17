@@ -11,58 +11,70 @@
 # **************************************************************************** #
 # --- Mandatory --- #
 NAME = push_swap
-SRC = ./src/
-OBJS = ./src/push_swap.c ./src/push_swap_utils.c
-MBJS = ./src/movements/push.c ./src/movements/reverse.c ./src/movements/swap.c ./src/movements/rotate.c
-SBJS = ./src/sort/sort_three.c ./src/sort/sort_four.c ./src/sort/sort_five.c ./src/sort/sort_six.c ./src/sort/sort_big.c ./src/sort/sort_big/sort_big_utils.c ./src/sort/sort_big/sort_fixed.c
-UBJS = ./src/utils/checker.c ./src/utils/parsing.c ./src/utils/stacks.c ./src/utils/visual.c
-ALLOBJS = $(OBJS) $(MBJS) $(SBJS) $(UBJS)  ./libft/libft.a
+SRC_DIR = ./src/
+OBJ_DIR = ./obj/
+
+# Listado de archivos fuente
+SRCS =	$(SRC_DIR)push_swap.c $(SRC_DIR)push_swap_utils.c \
+		$(SRC_DIR)movements/push.c $(SRC_DIR)movements/reverse.c $(SRC_DIR)movements/swap.c $(SRC_DIR)movements/rotate.c \
+    	$(SRC_DIR)sort/sort_three.c $(SRC_DIR)sort/sort_four.c $(SRC_DIR)sort/sort_five.c $(SRC_DIR)sort/sort_six.c $(SRC_DIR)sort/sort_big.c $(SRC_DIR)sort/sort_big/sort_big_utils.c $(SRC_DIR)sort/sort_big/sort_fixed.c \
+		$(SRC_DIR)utils/checker.c $(SRC_DIR)utils/parsing.c $(SRC_DIR)utils/stacks.c $(SRC_DIR)utils/visual.c
+
+# Convertimos los archivos .c en .o en la carpeta de objetos
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
 HEADER = ./include/push_swap.h
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
-RM = rm -f
+CFLAGS = -Wall -Werror -Wextra -I./include
+RM = rm -rf
 
-TESTER = test.sh
+LIBFT = ./libft/libft.a
 
-#color
-RED     = \033[31m
+# Color
 GREEN   = \033[32m
 YELLOW  = \033[33m
 BLUE    = \033[34m
 RESET   = \033[0m
 
-#Reglas
+# Regla principal
 all: $(NAME)
 
-$(NAME): $(HEADER) Makefile
-	make all -C libft
+$(LIBFT):
+	@make -C libft
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR) \
+	$(OBJ_DIR)/movements \
+	$(OBJ_DIR)/sort \
+	$(OBJ_DIR)/sort/sort_big \
+	$(OBJ_DIR)/utils
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER) Makefile | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(LIBFT) $(OBJS)
 	@echo "$(GREEN)Compilando push_swap...$(RESET)"
-	$(CC)  $(ALLOBJS) -g -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $(NAME)
 	@echo "$(BLUE)"
 	@echo "$(YELLOW)           ($(RESET)__$(YELLOW))\           $(RESET)"
 	@echo "$(YELLOW)           ($(RESET)oo$(YELLOW))\\________  $(RESET)"
-	@echo "$(RESET)           /|| \\        \\ push_swap READY$(RESET)"
+	@echo "$(RESET)           /|| \\        \\ push_swap ready$(RESET)"
 	@echo "$(RESET)              ||------w | $(RESET)"
 	@echo "$(RESET)              ||       || $(RESET)"
 	@echo "$(YELLOW)THE COW MAKES MUUUUUUUUUU!$(RESET)"
 	@echo "$(RESET)"
-
-test:
-	git clone https://github.com/rogerdevworld/push_swap_tester.git
-	cd push_swap_tester
-	chmod +x tester_push_swap.sh
-	./tester_push_swap.sh
+	@echo "$(YELLOW)Push_swap compilado con éxito!$(RESET)"
 
 clean:
-	@echo "$(GREEN)eliminado...$(RESET)"
-	$(RM) .o
-	make clean -C libft
+	@echo "$(GREEN)Eliminando archivos objeto...$(RESET)"
+	$(RM) $(OBJ_DIR)
+	@make clean -C libft
 
 fclean: clean
-	@echo "$(GREEN)eliminando todo...$(RESET)"
-	$(RM) $(NAME)
-	make fclean -C libft
-	
+	@echo "$(GREEN)Eliminando ejecutable y librerías...$(RESET)"
+	$(RM) $(NAME) $(LIBFT)
+	@make fclean -C libft
+
 re: fclean all
 
-.PHONY : all clean fclean re
+.PHONY: all clean fclean re

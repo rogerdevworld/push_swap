@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../include/push_swap.h"
 
-t_stack	*create_a_new_list(char **str_of_values, int argc)
+t_stack	*create_a_new_list(char **str_of_values)
 {
 	t_stack	*tmp;
 	int		i;
@@ -64,8 +64,8 @@ void	sort_case(t_stack **stack_a, t_stack **stack_b, int argc)
 	else
 	{
 		assign_chunks(*stack_a, chuncks_opimi(argc));
-		pass_group_to_b(stack_a, stack_b, argc);
-		go_to_a(stack_a, stack_b, argc);
+		pass_group_to_b(stack_a, stack_b);
+		go_to_a(stack_a, stack_b);
 		if (size_stack(*stack_b) == 1)
 			ft_pa_push_a(stack_a, stack_b);
 		else
@@ -88,7 +88,7 @@ int	main(int argc, char **argv)
 		ft_print_errors();
 		return (0);
 	}
-	stack_a = create_a_new_list(argv, argc - 1);
+	stack_a = create_a_new_list(argv);
 	if (!sorted(stack_a))
 		sort_case(&stack_a, &stack_b, argc);
 	return (0);

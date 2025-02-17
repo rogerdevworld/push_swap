@@ -48,7 +48,7 @@ t_stack	*ft_create_value(int value);
 void	ft_add_back_the_list(t_stack **list, t_stack *new_value);
 
 // --- 4. call the main function to create stack --- //
-t_stack	*create_a_new_list(char **str_of_values, int argc);
+t_stack	*create_a_new_list(char **str_of_values);
 
 // --- 5. function to link the circular list --- //
 void	ft_linke_first_to_last(t_stack **stack);
@@ -84,7 +84,7 @@ int		calculate_cost(t_stack *stack, t_stack *target);
 void	optimize_and_push(t_stack **stack_a, t_stack **stack_b);
 
 // --- 9.2.4 used the above move to b all --- //
-void	pass_group_to_b(t_stack **stack_a, t_stack **stack_b, int argc);
+void	pass_group_to_b(t_stack **stack_a, t_stack **stack_b);
 
 // --- 9.2.5 find the best largest element in b --- //
 t_stack	*find_best_element_b(t_stack *stack);
@@ -93,7 +93,7 @@ t_stack	*find_best_element_b(t_stack *stack);
 void	optimize_and_push_to_b(t_stack **stack_a, t_stack **stack_b);
 
 // --- 9.2.7 optimal push to send from b to j to --- //
-void	go_to_a(t_stack **stack_a, t_stack **stack_b, int argc);
+void	go_to_a(t_stack **stack_a, t_stack **stack_b);
 
 // --- 9.2.8 if necessary sort the end --- //
 void	sort_fixed(t_stack **stack_a, t_stack **stack_b);

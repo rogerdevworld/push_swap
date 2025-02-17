@@ -34,7 +34,7 @@ t_stack	*find_best_element(t_stack *stack)
 
 // --- función para pasar todos los grupos menos el 0 --- //
 // --- pasa el nodo en orden ascendente de grupo --- //
-void	pass_group_to_b(t_stack **stack_a, t_stack **stack_b, int argc)
+void	pass_group_to_b(t_stack **stack_a, t_stack **stack_b)
 {
 	int		max_group;
 	int		max;
@@ -103,7 +103,7 @@ void	optimize_and_push_to_b(t_stack **stack_a, t_stack **stack_b)
 }
 
 // --- pasa el nodo en orden ascendente de grupo --- //
-void	go_to_a(t_stack **stack_a, t_stack **stack_b, int argc)
+void	go_to_a(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*tmp;
 	t_stack	*start;
