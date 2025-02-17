@@ -72,7 +72,7 @@ clean:
 
 fclean: clean
 	@echo "$(GREEN)Eliminando ejecutable y librerías...$(RESET)"
-	$(RM) $(NAME) 
+	$(RM) -f $(NAME) 
 	@make fclean -C $(LIBFT)
 
 re: fclean all
