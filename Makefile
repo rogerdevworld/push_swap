@@ -6,13 +6,13 @@
 #    By: rmarrero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:58:52 by rmarrero          #+#    #+#              #
-#    Updated: 2025/02/10 12:17:33 by rmarrero         ###   ########.fr        #
+#    Updated: 2025/02/17 11:55:01 by rmarrero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # --- Mandatory --- #
 NAME = push_swap
 SRC_DIR = ./src/
-OBJ_DIR = ./obj/
+OBJ_DIR = ./obj
 
 # Listado de archivos fuente
 SRCS =	$(SRC_DIR)push_swap.c $(SRC_DIR)push_swap_utils.c \
@@ -21,14 +21,15 @@ SRCS =	$(SRC_DIR)push_swap.c $(SRC_DIR)push_swap_utils.c \
 		$(SRC_DIR)utils/checker.c $(SRC_DIR)utils/parsing.c $(SRC_DIR)utils/stacks.c $(SRC_DIR)utils/visual.c
 
 # Convertimos los archivos .c en .o en la carpeta de objetos
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)/%.o)
 
 HEADER = ./include/push_swap.h
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -I./include
 RM = rm -rf
 
-LIBFT = ./libft/libft.a
+LIBFT = ./libft
+EX_LIB = $(LIBFT)/libft.a
 
 # Color
 GREEN   = \033[32m
@@ -37,10 +38,10 @@ BLUE    = \033[34m
 RESET   = \033[0m
 
 # Regla principal
-all: $(NAME)
+all: libs $(NAME) 
 
-$(LIBFT):
-	@make -C libft
+libs:
+	@make -C $(LIBFT)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR) \
@@ -49,12 +50,12 @@ $(OBJ_DIR):
 	$(OBJ_DIR)/sort/sort_big \
 	$(OBJ_DIR)/utils
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER) Makefile | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)%.c $(HEADER) Makefile | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(EX_LIB) $(OBJS)
 	@echo "$(GREEN)Compilando push_swap...$(RESET)"
-	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -o $(NAME) > /dev/null
 	@echo "$(BLUE)"
 	@echo "$(YELLOW)           ($(RESET)__$(YELLOW))\           $(RESET)"
 	@echo "$(YELLOW)           ($(RESET)oo$(YELLOW))\\________  $(RESET)"
@@ -62,18 +63,17 @@ $(NAME): $(LIBFT) $(OBJS)
 	@echo "$(RESET)              ||------w | $(RESET)"
 	@echo "$(RESET)              ||       || $(RESET)"
 	@echo "$(YELLOW)THE COW MAKES MUUUUUUUUUU!$(RESET)"
-	@echo "$(RESET)"
-	@echo "$(YELLOW)Push_swap compilado con éxito!$(RESET)"
+	@echo "$(YELLOW)push_swap compilado con éxito!$(RESET)"
 
 clean:
 	@echo "$(GREEN)Eliminando archivos objeto...$(RESET)"
 	$(RM) $(OBJ_DIR)
-	@make clean -C libft
+	@make clean -C $(LIBFT)
 
 fclean: clean
 	@echo "$(GREEN)Eliminando ejecutable y librerías...$(RESET)"
-	$(RM) $(NAME) $(LIBFT)
-	@make fclean -C libft
+	$(RM) $(NAME) 
+	@make fclean -C $(LIBFT)
 
 re: fclean all
 
