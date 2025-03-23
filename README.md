@@ -1,3 +1,4 @@
+![Fract-ol Image](./image.svg)
 <h1 class="title">Push Swap algorithm</h1>
 
 ### **Detailed Flowchart of the Push Swap Algorithm**
