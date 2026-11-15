@@ -17,7 +17,7 @@ jobs:
         submodules: recursive
 
     - name: Build push_swap
-      run: make && make bonus
+      run: make
 
     - name: Clone and Run Tester (rogerdevworld/push_swap_tester)
       run: |
