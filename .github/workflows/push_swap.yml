@@ -1,54 +1,54 @@
-name: Push_swap CI
+name: push_swap tester
 
 on:
-push:
-branches: [ "main", "master", "develop" ]
-pull_request:
-branches: [ "main", "master", "develop" ]
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
 
 jobs:
-build-and-test:
-runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
 
-steps:
-  - name: Checkout repository and submodules
-    uses: actions/checkout@v4
-    with:
-      submodules: recursive
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
 
-  - name: Install dependencies
-    run: |
-      sudo apt-get update
-      sudo apt-get install -y build-essential valgrind python3
+    - name: Build push_swap
+      run: make
 
-  - name: Build push_swap
-    run: |
-      make
+    - name: Run tests
+      run: |
+        # Añade aquí los comandos de tu tester (por ejemplo, ejecutando los scripts o el binario)
+        ./push_swap 3 2 1
+        echo "Compilación y pruebas básicas completadas con éxito."
 
-  - name: Run local checks & basic tests
-    run: |
-      # Example basic check: ensure executable exists
-      if [ ! -f ./push_swap ]; then
-        echo "Error: push_swap executable not found!"
-        exit 1
-      fi
-      
-      # Quick sanity test (should output nothing or valid operations for sorted input)
-      ./push_swap 1 2 3
-      
-      # Check for errors on invalid arguments
-      ./push_swap 1 a || true
+    - name: Run local checks & basic tests
+      run: |
+        # Example basic check: ensure executable exists
+        if [ ! -f ./push_swap ]; then
+          echo "Error: push_swap executable not found!"
+          exit 1
+        fi
+        
+        # Quick sanity test (should output nothing or valid operations for sorted input)
+        ./push_swap 1 2 3
+        
+        # Check for errors on invalid arguments
+        ./push_swap 1 a || true
 
-  - name: Clone and Run Tester (rogerdevworld/push_swap_tester)
-    run: |
-      git clone https://github.com/rogerdevworld/push_swap_tester.git
-      cd push_swap_tester
-      # Adjust execution command if the tester requires specific arguments or a Makefile
-      # (Modify this step depending on the exact README of the tester repository)
-      if [ -f "Makefile" ]; then
-        make
-      elif [ -f "test.sh" ]; then
-        bash test.sh || true
-      else
-        echo "Tester downloaded successfully. Review its structure if automated execution fails."
-      fi
+    - name: Clone and Run Tester (rogerdevworld/push_swap_tester)
+      run: |
+        git clone https://github.com/rogerdevworld/push_swap_tester.git
+        cd push_swap_tester
+        # Adjust execution command if the tester requires specific arguments or a Makefile
+        # (Modify this step depending on the exact README of the tester repository)
+        if [ -f "Makefile" ]; then
+          make
+        elif [ -f "test.sh" ]; then
+          bash test.sh || true
+        else
+          echo "Tester downloaded successfully. Review its structure if automated execution fails."
+        fi
