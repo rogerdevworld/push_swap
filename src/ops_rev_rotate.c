@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rev_rotate.c                                       :+:      :+:    :+:   */
+/*   ops_rev_rotate.c                                   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarrero  <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 14:22:49 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/07/23 14:23:20 by rmarrero         ###   ########.fr       */
+/*   Created: 2026/11/16 18:45:00 by student           #+#    #+#             */
+/*   Updated: 2026/11/16 18:45:00 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
-static void	rev_rotate(t_stack_node **stack)
+static void	rev_rotate_nodes(t_node **stack)
 {
-	t_stack_node	*last;
+	t_node	*last;
 
 	if (!*stack || !(*stack)->next)
 		return ;
@@ -25,24 +26,21 @@ static void	rev_rotate(t_stack_node **stack)
 	last->next->prev = last;
 }
 
-void	rra(t_stack_node **a, bool print)
+void	op_rra(t_sim *s)
 {
-	rev_rotate(a);
-	if (!print)
-		write(1, "rra\n", 4);
+	rev_rotate_nodes(&s->a);
+	record_op(&s->ops, OP_RRA);
 }
 
-void	rrb(t_stack_node **b, bool print)
+void	op_rrb(t_sim *s)
 {
-	rev_rotate(b);
-	if (!print)
-		write(1, "rrb\n", 4);
+	rev_rotate_nodes(&s->b);
+	record_op(&s->ops, OP_RRB);
 }
 
-void	rrr(t_stack_node **a, t_stack_node **b, bool print)
+void	op_rrr(t_sim *s)
 {
-	rev_rotate(a);
-	rev_rotate(b);
-	if (!print)
-		write(1, "rrr\n", 4);
+	rev_rotate_nodes(&s->a);
+	rev_rotate_nodes(&s->b);
+	record_op(&s->ops, OP_RRR);
 }

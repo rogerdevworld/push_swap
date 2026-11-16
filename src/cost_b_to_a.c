@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cost_b_to_a.c                                      :+:      :+:    :+:   */
+/*   cost_b_to_a.c                                      */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarrero  <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 14:22:49 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/07/23 14:23:20 by rmarrero         ###   ########.fr       */
+/*   Created: 2026/11/16 18:45:00 by student           #+#    #+#             */
+/*   Updated: 2026/11/16 18:45:00 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
-static t_stack_node	*find_target_in_a(t_stack_node *a, int rank_b)
+static t_node	*find_target_in_a(t_node *a, int rank_b)
 {
-	t_stack_node	*curr;
-	t_stack_node	*target;
-	int				best_rank;
+	t_node	*curr;
+	t_node	*target;
+	int		best_rank;
 
 	best_rank = INT_MAX;
 	target = NULL;
@@ -34,53 +35,52 @@ static t_stack_node	*find_target_in_a(t_stack_node *a, int rank_b)
 	return (target);
 }
 
-static void	calc_best_route(t_stack_node *node_b, int len_a, int len_b)
+static void	eval_routes(t_node *nb, int la, int lb, bool rrr_bias)
 {
 	int	c[4];
 	int	i;
 
-	if (node_b->target_node->index > node_b->index)
-		c[0] = node_b->target_node->index;
-	else
-		c[0] = node_b->index;
-	if ((len_a - node_b->target_node->index) > (len_b - node_b->index))
-		c[1] = len_a - node_b->target_node->index;
-	else
-		c[1] = len_b - node_b->index;
-	c[2] = node_b->target_node->index + (len_b - node_b->index);
-	c[3] = (len_a - node_b->target_node->index) + node_b->index;
-	node_b->push_cost = c[0];
-	node_b->move_type = 0;
-	i = 1;
-	while (i < 4)
+	c[0] = nb->index;
+	if (nb->target->index > nb->index)
+		c[0] = nb->target->index;
+	c[1] = lb - nb->index;
+	if ((la - nb->target->index) > (lb - nb->index))
+		c[1] = la - nb->target->index;
+	c[2] = nb->target->index + (lb - nb->index);
+	c[3] = (la - nb->target->index) + nb->index;
+	nb->cost = c[0];
+	nb->route = 0;
+	i = 0;
+	while (++i < 4)
 	{
-		if (c[i] < node_b->push_cost)
+		if (c[i] < nb->cost || (rrr_bias && i == 1 && c[i] == nb->cost))
 		{
-			node_b->push_cost = c[i];
-			node_b->move_type = i;
+			nb->cost = c[i];
+			nb->route = i;
 		}
-		i++;
 	}
 }
 
-t_stack_node	*get_cheapest_b(t_stack_node *a, t_stack_node *b)
+t_node	*get_cheapest_b(t_sim *s)
 {
-	t_stack_node	*cheapest;
-	int				len_a;
-	int				len_b;
+	t_node	*ch;
+	t_node	*curr;
+	int		la;
+	int		lb;
 
-	current_index(a);
-	current_index(b);
-	len_a = stack_len(a);
-	len_b = stack_len(b);
-	cheapest = b;
-	while (b)
+	current_index(s->a);
+	current_index(s->b);
+	la = stack_len(s->a);
+	lb = stack_len(s->b);
+	curr = s->b;
+	ch = curr;
+	while (curr)
 	{
-		b->target_node = find_target_in_a(a, b->rank);
-		calc_best_route(b, len_a, len_b);
-		if (b->push_cost < cheapest->push_cost)
-			cheapest = b;
-		b = b->next;
+		curr->target = find_target_in_a(s->a, curr->rank);
+		eval_routes(curr, la, lb, s->rrr_bias);
+		if (curr->cost < ch->cost)
+			ch = curr;
+		curr = curr->next;
 	}
-	return (cheapest);
+	return (ch);
 }

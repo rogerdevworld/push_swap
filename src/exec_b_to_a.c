@@ -1,61 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_b_to_a.c                                      :+:      :+:    :+:   */
+/*   exec_b_to_a.c                                      */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarrero  <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 14:22:49 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/07/23 14:23:20 by rmarrero         ###   ########.fr       */
+/*   Created: 2026/11/16 18:45:00 by student           #+#    #+#             */
+/*   Updated: 2026/11/16 18:45:00 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
-static void	exec_both_up(t_stack_node **a, t_stack_node **b, t_stack_node *ch)
+static void	exec_both_up(t_sim *s, t_node *ch)
 {
-	while (*a != ch->target_node && *b != ch)
-		rr(a, b, false);
-	while (*a != ch->target_node)
-		ra(a, false);
-	while (*b != ch)
-		rb(b, false);
+	while (s->a != ch->target && s->b != ch)
+		op_rr(s);
+	while (s->a != ch->target)
+		op_ra(s);
+	while (s->b != ch)
+		op_rb(s);
 }
 
-static void	exec_both_down(t_stack_node **a, t_stack_node **b, t_stack_node *ch)
+static void	exec_both_down(t_sim *s, t_node *ch)
 {
-	while (*a != ch->target_node && *b != ch)
-		rrr(a, b, false);
-	while (*a != ch->target_node)
-		rra(a, false);
-	while (*b != ch)
-		rrb(b, false);
+	while (s->a != ch->target && s->b != ch)
+		op_rrr(s);
+	while (s->a != ch->target)
+		op_rra(s);
+	while (s->b != ch)
+		op_rrb(s);
 }
 
-static void	exec_mixed(t_stack_node **a, t_stack_node **b, t_stack_node *ch)
+static void	exec_mixed(t_sim *s, t_node *ch)
 {
-	if (ch->move_type == 2)
+	if (ch->route == 2)
 	{
-		while (*a != ch->target_node)
-			ra(a, false);
-		while (*b != ch)
-			rrb(b, false);
+		while (s->a != ch->target)
+			op_ra(s);
+		while (s->b != ch)
+			op_rrb(s);
 	}
 	else
 	{
-		while (*a != ch->target_node)
-			rra(a, false);
-		while (*b != ch)
-			rb(b, false);
+		while (s->a != ch->target)
+			op_rra(s);
+		while (s->b != ch)
+			op_rb(s);
 	}
 }
 
-void	exec_cheapest_b(t_stack_node **a, t_stack_node **b, t_stack_node *ch)
+void	exec_cheapest_b(t_sim *s, t_node *ch)
 {
-	if (ch->move_type == 0)
-		exec_both_up(a, b, ch);
-	else if (ch->move_type == 1)
-		exec_both_down(a, b, ch);
+	if (ch->route == 0)
+		exec_both_up(s, ch);
+	else if (ch->route == 1)
+		exec_both_down(s, ch);
 	else
-		exec_mixed(a, b, ch);
-	pa(a, b, false);
+		exec_mixed(s, ch);
+	op_pa(s);
 }

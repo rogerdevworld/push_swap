@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   checker_ops_extra.c                                */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarrero  <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 14:22:49 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/07/23 14:23:20 by rmarrero         ###   ########.fr       */
+/*   Created: 2026/11/16 18:45:00 by student           #+#    #+#             */
+/*   Updated: 2026/11/16 18:45:00 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
-static void	swap(t_stack_node **head)
+static void	swap_b(t_node **head)
 {
 	if (!*head || !(*head)->next)
 		return ;
@@ -24,25 +25,15 @@ static void	swap(t_stack_node **head)
 	(*head)->prev = NULL;
 }
 
-//
-void	sa(t_stack_node **a, bool print)
+void	op_sb(t_sim *s)
 {
-	swap(a);
-	if (!print)
-		write(1, "sa\n", 3);
+	swap_b(&s->b);
+	record_op(&s->ops, OP_SB);
 }
 
-void	sb(t_stack_node **b, bool print)
+void	op_ss(t_sim *s)
 {
-	swap(b);
-	if (!print)
-		write(1, "sb\n", 3);
-}
-
-void	ss(t_stack_node **a, t_stack_node **b, bool print)
-{
-	swap(a);
-	swap(b);
-	if (!print)
-		write(1, "ss\n", 3);
+	swap_b(&s->a);
+	swap_b(&s->b);
+	record_op(&s->ops, OP_SS);
 }

@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line.c                                    */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarrero  <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 14:22:49 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/07/23 14:23:20 by rmarrero         ###   ########.fr       */
+/*   Created: 2026/11/16 18:45:00 by student           #+#    #+#             */
+/*   Updated: 2026/11/16 18:45:00 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 char	*get_next_line(int fd)
 {
 	char	*buf;
 	int		i;
-	int		bytes_read;
+	int		rd;
 
-	buf = malloc(1000);
+	buf = malloc(1024);
 	if (!buf)
 		return (NULL);
 	i = 0;
-	bytes_read = read(fd, &buf[i], 1);
-	while (bytes_read > 0 && buf[i] != '\n' && i < 999)
+	rd = read(fd, &buf[i], 1);
+	while (rd > 0 && buf[i] != '\n' && i < 1023)
 	{
 		i++;
-		bytes_read = read(fd, &buf[i], 1);
+		rd = read(fd, &buf[i], 1);
 	}
-	if (bytes_read <= 0 && i == 0)
+	if (rd <= 0 && i == 0)
 	{
 		free(buf);
 		return (NULL);

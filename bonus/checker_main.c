@@ -1,102 +1,112 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_main.c                                     :+:      :+:    :+:   */
+/*   checker_main.c                                     */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarrero  <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 14:22:49 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/07/23 14:23:20 by rmarrero         ###   ########.fr       */
+/*   Created: 2026/11/16 18:45:00 by student           #+#    #+#             */
+/*   Updated: 2026/11/16 18:45:00 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
-static int	exec_swap_push(t_stack_node **a, t_stack_node **b, char *line)
+static void	handle_two_args_b(t_node **a, char *arg)
+{
+	char	**split_argv;
+
+	split_argv = ft_split(arg, ' ');
+	if (!split_argv || !split_argv[0])
+	{
+		free_split(split_argv);
+		write(2, "Error\n", 6);
+		exit(1);
+	}
+	init_stack_a(a, split_argv);
+	free_split(split_argv);
+}
+
+static int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+
+static bool	exec_line(t_sim *s, char *line)
 {
 	if (!ft_strcmp(line, "sa\n"))
-		sa(a, false);
-	else if (!ft_strcmp(line, "sb\n"))
-		sb(b, false);
-	else if (!ft_strcmp(line, "ss\n"))
-		ss(a, b, false);
-	else if (!ft_strcmp(line, "pa\n"))
-		pa(a, b, false);
-	else if (!ft_strcmp(line, "pb\n"))
-		pb(b, a, false);
-	else
-		return (0);
-	return (1);
-}
-
-static int	exec_rotate(t_stack_node **a, t_stack_node **b, char *line)
-{
+		return (op_sa(s), true);
+	if (!ft_strcmp(line, "sb\n"))
+		return (op_sb(s), true);
+	if (!ft_strcmp(line, "ss\n"))
+		return (op_ss(s), true);
+	if (!ft_strcmp(line, "pa\n"))
+		return (op_pa(s), true);
+	if (!ft_strcmp(line, "pb\n"))
+		return (op_pb(s), true);
 	if (!ft_strcmp(line, "ra\n"))
-		ra(a, false);
-	else if (!ft_strcmp(line, "rb\n"))
-		rb(b, false);
-	else if (!ft_strcmp(line, "rr\n"))
-		rr(a, b, false);
-	else if (!ft_strcmp(line, "rra\n"))
-		rra(a, false);
-	else if (!ft_strcmp(line, "rrb\n"))
-		rrb(b, false);
-	else if (!ft_strcmp(line, "rrr\n"))
-		rrr(a, b, false);
-	else
-		return (0);
-	return (1);
+		return (op_ra(s), true);
+	if (!ft_strcmp(line, "rb\n"))
+		return (op_rb(s), true);
+	if (!ft_strcmp(line, "rr\n"))
+		return (op_rr(s), true);
+	if (!ft_strcmp(line, "rra\n"))
+		return (op_rra(s), true);
+	if (!ft_strcmp(line, "rrb\n"))
+		return (op_rrb(s), true);
+	if (!ft_strcmp(line, "rrr\n"))
+		return (op_rrr(s), true);
+	return (false);
 }
 
-static void	exec_instruction(t_stack_node **a, t_stack_node **b, char *line)
-{
-	if (exec_swap_push(a, b, line))
-		return ;
-	if (exec_rotate(a, b, line))
-		return ;
-	free(line);
-	free_stack(a);
-	free_stack(b);
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
-void	read_and_exec(t_stack_node **a, t_stack_node **b)
+static void	run_checker_loop(t_sim *s)
 {
 	char	*line;
 
+	init_ops(&s->ops);
 	line = get_next_line(0);
 	while (line)
 	{
-		exec_instruction(a, b, line);
+		if (!exec_line(s, line))
+		{
+			free(line);
+			free_stack(&s->a);
+			free_stack(&s->b);
+			free(s->ops.arr);
+			write(2, "Error\n", 6);
+			exit(1);
+		}
 		free(line);
 		line = get_next_line(0);
 	}
-	if (stack_sorted(*a) && !*b)
-		write(1, "OK\n", 3);
-	else
-		write(1, "KO\n", 3);
 }
 
 int	main(int argc, char **argv)
 {
-	t_stack_node	*a;
-	t_stack_node	*b;
+	t_sim	s;
 
-	a = NULL;
-	b = NULL;
+	s.a = NULL;
+	s.b = NULL;
 	if (argc == 1)
 		return (0);
 	if (argc == 2 && !argv[1][0])
-	{
-		write(2, "Error\n", 6);
-		return (1);
-	}
+		return (write(2, "Error\n", 6), 1);
 	else if (argc == 2)
-		handle_two_args(&a, argv[1]);
+		handle_two_args_b(&s.a, argv[1]);
 	else
-		init_stack_a(&a, argv + 1);
-	read_and_exec(&a, &b);
-	free_stack(&a);
-	free_stack(&b);
+		init_stack_a(&s.a, argv + 1);
+	run_checker_loop(&s);
+	if (stack_sorted(s.a) && !s.b)
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
+	free_stack(&s.a);
+	free_stack(&s.b);
+	free(s.ops.arr);
 	return (0);
 }

@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*   stack_utils.c                                      */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarrero  <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 14:22:49 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/07/23 14:23:20 by rmarrero         ###   ########.fr       */
+/*   Created: 2026/11/16 18:45:00 by student           #+#    #+#             */
+/*   Updated: 2026/11/16 18:45:00 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
-int	stack_len(t_stack_node *stack)
+int	stack_len(t_node *stack)
 {
 	int	count;
 
-	if (!stack)
-		return (0);
 	count = 0;
 	while (stack)
 	{
@@ -26,7 +25,7 @@ int	stack_len(t_stack_node *stack)
 	return (count);
 }
 
-t_stack_node	*find_last(t_stack_node *stack)
+t_node	*find_last(t_node *stack)
 {
 	if (!stack)
 		return (NULL);
@@ -35,7 +34,7 @@ t_stack_node	*find_last(t_stack_node *stack)
 	return (stack);
 }
 
-bool	stack_sorted(t_stack_node *stack)
+bool	stack_sorted(t_node *stack)
 {
 	if (!stack)
 		return (true);
@@ -48,10 +47,10 @@ bool	stack_sorted(t_stack_node *stack)
 	return (true);
 }
 
-t_stack_node	*find_min(t_stack_node *stack)
+t_node	*find_min(t_node *stack)
 {
-	long			min;
-	t_stack_node	*min_node;
+	long	min;
+	t_node	*min_node;
 
 	if (!stack)
 		return (NULL);
@@ -69,10 +68,10 @@ t_stack_node	*find_min(t_stack_node *stack)
 	return (min_node);
 }
 
-t_stack_node	*find_max(t_stack_node *stack)
+t_node	*find_max(t_node *stack)
 {
-	long			max;
-	t_stack_node	*max_node;
+	long	max;
+	t_node	*max_node;
 
 	if (!stack)
 		return (NULL);

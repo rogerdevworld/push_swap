@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   error_handling.c                                   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmarrero  <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 14:22:49 by rmarrero          #+#    #+#             */
-/*   Updated: 2025/07/23 14:23:20 by rmarrero         ###   ########.fr       */
+/*   Created: 2026/11/16 18:45:00 by student           #+#    #+#             */
+/*   Updated: 2026/11/16 18:45:00 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 int	error_syntax(char *str)
@@ -25,7 +26,7 @@ int	error_syntax(char *str)
 	return (0);
 }
 
-int	error_duplicate(t_stack_node *a, int n)
+int	error_duplicate(t_node *a, int n)
 {
 	if (!a)
 		return (0);
@@ -38,26 +39,29 @@ int	error_duplicate(t_stack_node *a, int n)
 	return (0);
 }
 
-void	free_stack(t_stack_node **stack)
+void	free_stack(t_node **stack)
 {
-	t_stack_node	*tmp;
-	t_stack_node	*current;
+	t_node	*tmp;
+	t_node	*curr;
 
 	if (!stack)
 		return ;
-	current = *stack;
-	while (current)
+	curr = *stack;
+	while (curr)
 	{
-		tmp = current->next;
-		free(current);
-		current = tmp;
+		tmp = curr->next;
+		free(curr);
+		curr = tmp;
 	}
 	*stack = NULL;
 }
 
-void	free_errors(t_stack_node **a)
+void	free_errors(t_node **a)
 {
+	int i;
+
 	free_stack(a);
-	write(2, "Error\n", 6);
+	i = write(2, "Error\n", 6);
+	(void)i;
 	exit(1);
 }

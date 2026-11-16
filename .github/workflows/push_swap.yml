@@ -33,6 +33,9 @@ jobs:
     - name: Build push_swap
       run: make
 
+    - name: Build bonus checker
+      run: make bonus
+
     - name: Clone and Run Tester (rogerdevworld/push_swap_tester)
       run: |
         git clone https://github.com/rogerdevworld/push_swap_tester.git

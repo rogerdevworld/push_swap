@@ -2,23 +2,23 @@ NAME		= push_swap
 BONUS_NAME	= checker
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -Iinc
+CFLAGS		= -Wall -Wextra -Werror -O3 -Iinc
 
 SRC_DIR		= src/
-OBJ_DIR		= obj/
 BONUS_DIR	= bonus/
+OBJ_DIR		= obj/
 
-SRCS		= main.c ft_split.c utils.c stack_init.c error_handling.c \
-			  stack_utils.c lis_rank.c cost_b_to_a.c exec_b_to_a.c \
-			  sort_three.c sort_stacks.c \
-			  swap.c push.c rotate.c rev_rotate.c
+COMMON_SRCS	= ft_split.c stack_init.c error_handling.c stack_utils.c \
+			  index_rank.c ops_recorder.c ops_swap_push.c ops_rotate.c \
+			  ops_rev_rotate.c
 
-BONUS_SRCS	= checker_main.c utils.c ft_split.c stack_init.c error_handling.c \
-			  stack_utils.c swap.c push.c rotate.c rev_rotate.c \
-			  get_next_line.c
+MAIN_SRCS	= main.c dp_lis.c push_chunks.c cost_b_to_a.c \
+			  exec_b_to_a.c portfolio.c
 
-OBJS		= $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
-BONUS_OBJS	= $(addprefix $(OBJ_DIR), $(BONUS_SRCS:.c=.o))
+BONUS_SRCS	= checker_main.c checker_ops_extra.c get_next_line.c
+
+OBJS		= $(addprefix $(OBJ_DIR), $(COMMON_SRCS:.c=.o) $(MAIN_SRCS:.c=.o))
+BONUS_OBJS	= $(addprefix $(OBJ_DIR), $(COMMON_SRCS:.c=.o) $(BONUS_SRCS:.c=.o))
 
 all: $(NAME)
 
