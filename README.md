@@ -1,6 +1,6 @@
 # `push_swap` — Portfolio Engine (DP Circular LIS + Multi-Variant Turk + Peephole Optimizer)
 
-Implementación de alto rendimiento en C para el proyecto **`push_swap`** de 42, diseñada para minimizar el número de operaciones mediante un **Portafolio de Algoritmos en Memoria** que evalúa 6 variantes heurísticas en paralelo y selecciona la secuencia más corta, complementada con el programa **`checker` (Bonus)** y pipeline CI/CD con **Norminette**.
+Implementación de alto rendimiento en C para el proyecto **`push_swap`** de 42, diseñada para minimizar el número de operaciones mediante un **Portafolio de Algoritmos en Memoria** que evalúa 6 variantes heurísticas en paralelo y selecciona la secuencia más corta.
 
 ---
 
