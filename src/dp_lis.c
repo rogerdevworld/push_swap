@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   dp_lis.c                                           */
-/*                                                    +:+ +:+         +:+     */
-/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/16 18:45:00 by student           #+#    #+#             */
-/*   Updated: 2026/11/16 18:45:00 by student          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../inc/push_swap.h"
 
 static void	fill_rot_ranks(t_node *a, int *arr, int start, int n)
@@ -87,7 +75,7 @@ static int  eval_rotation(t_node *a, int start, int n, bool mark)
 
     len = 0;
     best = 0;
-    // Cambiamos malloc por ft_calloc para inicializar todo a 0 por seguridad
+	//////hay que poner la libft y modificar por ft_calloc
     buf = calloc((size_t)(n * 3), sizeof(int));
     if (!buf)
         return (0);
