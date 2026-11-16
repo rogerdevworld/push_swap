@@ -1,46 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_main.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmarrero  <marvin@42.fr>                   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/23 14:22:49 by rmarrero          #+#    #+#             */
+/*   Updated: 2025/07/23 14:23:20 by rmarrero         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../inc/push_swap.h"
 
-static void	free_split(char **argv)
-{
-	int	i;
-
-	if (!argv)
-		return ;
-	i = 0;
-	while (argv[i])
-	{
-		free(argv[i]);
-		i++;
-	}
-	free(argv);
-}
-
-static void	handle_two_args(t_stack_node **a, char *arg)
-{
-	char	**split_argv;
-
-	split_argv = ft_split(arg, ' ');
-	if (!split_argv || !split_argv[0])
-	{
-		free_split(split_argv);
-		write(2, "Error\n", 6);
-		exit(1);
-	}
-	init_stack_a(a, split_argv);
-	free_split(split_argv);
-}
-
-static int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-static void	exec_instruction(t_stack_node **a, t_stack_node **b, char *line)
+static int	exec_swap_push(t_stack_node **a, t_stack_node **b, char *line)
 {
 	if (!ft_strcmp(line, "sa\n"))
 		sa(a, false);
@@ -52,7 +23,14 @@ static void	exec_instruction(t_stack_node **a, t_stack_node **b, char *line)
 		pa(a, b, false);
 	else if (!ft_strcmp(line, "pb\n"))
 		pb(b, a, false);
-	else if (!ft_strcmp(line, "ra\n"))
+	else
+		return (0);
+	return (1);
+}
+
+static int	exec_rotate(t_stack_node **a, t_stack_node **b, char *line)
+{
+	if (!ft_strcmp(line, "ra\n"))
 		ra(a, false);
 	else if (!ft_strcmp(line, "rb\n"))
 		rb(b, false);
@@ -65,16 +43,24 @@ static void	exec_instruction(t_stack_node **a, t_stack_node **b, char *line)
 	else if (!ft_strcmp(line, "rrr\n"))
 		rrr(a, b, false);
 	else
-	{
-		free(line);
-		free_stack(a);
-		free_stack(b);
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		return (0);
+	return (1);
 }
 
-static void	read_and_exec(t_stack_node **a, t_stack_node **b)
+static void	exec_instruction(t_stack_node **a, t_stack_node **b, char *line)
+{
+	if (exec_swap_push(a, b, line))
+		return ;
+	if (exec_rotate(a, b, line))
+		return ;
+	free(line);
+	free_stack(a);
+	free_stack(b);
+	write(2, "Error\n", 6);
+	exit(1);
+}
+
+void	read_and_exec(t_stack_node **a, t_stack_node **b)
 {
 	char	*line;
 

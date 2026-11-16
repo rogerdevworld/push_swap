@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmarrero  <marvin@42.fr>                   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/23 14:22:49 by rmarrero          #+#    #+#             */
+/*   Updated: 2025/07/23 14:23:20 by rmarrero         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -34,6 +45,11 @@ bool			stack_sorted(t_stack_node *stack);
 t_stack_node	*find_min(t_stack_node *stack);
 t_stack_node	*find_max(t_stack_node *stack);
 void			current_index(t_stack_node *stack);
+void			handle_two_args(t_stack_node **a, char *arg);
+void			free_split(char **argv);
+char			*get_next_line(int fd);
+void			read_and_exec(t_stack_node **a, t_stack_node **b);
+int				ft_strcmp(char *s1, char *s2);
 
 /* LIS & Ranking */
 void			assign_ranks(t_stack_node *a);
