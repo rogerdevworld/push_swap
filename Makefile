@@ -8,12 +8,12 @@ SRC_DIR		= src/
 OBJ_DIR		= obj/
 BONUS_DIR	= bonus/
 
-SRCS		= main.c ft_split.c stack_init.c error_handling.c \
+SRCS		= main.c ft_split.c utils.c stack_init.c error_handling.c \
 			  stack_utils.c lis_rank.c cost_b_to_a.c exec_b_to_a.c \
 			  sort_three.c sort_stacks.c \
 			  swap.c push.c rotate.c rev_rotate.c
 
-BONUS_SRCS	= checker_main.c ft_split.c stack_init.c error_handling.c \
+BONUS_SRCS	= checker_main.c utils.c ft_split.c stack_init.c error_handling.c \
 			  stack_utils.c swap.c push.c rotate.c rev_rotate.c \
 			  get_next_line.c
 
