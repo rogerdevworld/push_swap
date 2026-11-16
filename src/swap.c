@@ -24,6 +24,7 @@ static void	swap(t_stack_node **head)
 	(*head)->prev = NULL;
 }
 
+//
 void	sa(t_stack_node **a, bool print)
 {
 	swap(a);
